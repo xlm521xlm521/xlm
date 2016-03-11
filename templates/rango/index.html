@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+
+{% load staticfiles %}
+<html>
+<head>
+    <title>学生选题教育平台</title>
+    <meta charset=UTF-8"UTF-8">
+</head>
+    {% if user.is_authenticated %}
+        <h1>您好 {{ user.username }}! </h1>
+    {% else %}
+        <h1>您好 游客</h1>
+    {% endif %}
+        
+<body>
+    <h1>欢迎来到  XXX 学生选题教育平台 </h1>
+    <h2>题型 <h2>
+    {% if categories %}
+        <ul>
+            {% for category in categories %}
+            <!-- <li>{{ forloop.counter}} : {{ category.name }}</li> -->
+            <!-- Following line changed to add an HTML hyperlink -->
+            <li>
+            <a href="/rango/category/{{ category.slug }}">{{ category.name }}</a>
+            </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <strong>There are no categories present.</strong>
+    {% endif %}
+
+    <!--<a href="/rango/register/">Register Here</a><br /> -->
+    {% if user.is_authenticated %}
+        <a href="/rango/logout/">Logout</a><br />
+        <a href="/rango/add_category/">Add a New Category</a><br />
+    {% else %}
+        <a href="/rango/login/">Login</a><br />
+    {% endif %}
+        <a href="/rango/register/">register</a><br />
+        <img src = "{% static "images/shan.jpg" %}" alt="Picture of itcast"/ >
+</body>
+
+</html>
